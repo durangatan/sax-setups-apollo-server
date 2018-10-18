@@ -164,19 +164,23 @@ const resolvers = {
         .get();
       return players.docs.map(player => {
         const playerData = player.data();
-        return Object.assign(playerData, {
-          setups: setups.docs.filter(setup => setup.data().playerId === player.id).map(setup => {
-            return Object.assign(setup.data(), {
-              mouthpieces: mouthpieces.docs
-                .map(mouthpiece => mouthpiece.data())
-                .filter(mouthpiece => mouthpiece.setupId === setup.id),
-              reeds: reeds.docs.map(reed => reed.data()).filter(reed => reed.setupId === setup.id),
-              saxophones: saxophones.docs
-                .map(saxophone => saxophone.data())
-                .filter(saxophone => saxophone.setupId === setup.id)
-            });
-          })
-        });
+        return Object.assign(
+          playerData,
+          {
+            setups: setups.docs.filter(setup => setup.data().playerId === player.id).map(setup => {
+              return Object.assign(setup.data(), {
+                mouthpieces: mouthpieces.docs
+                  .map(mouthpiece => mouthpiece.data())
+                  .filter(mouthpiece => mouthpiece.setupId === setup.id),
+                reeds: reeds.docs.map(reed => reed.data()).filter(reed => reed.setupId === setup.id),
+                saxophones: saxophones.docs
+                  .map(saxophone => saxophone.data())
+                  .filter(saxophone => saxophone.setupId === setup.id)
+              });
+            })
+          },
+          { id: player }
+        );
       });
     }
   }
@@ -185,6 +189,9 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  engine: {
+    apiKey: process.env.ENGINE_API_KEY
+  },
   introspection: true
 });
 
