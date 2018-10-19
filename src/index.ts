@@ -74,6 +74,7 @@ const typeDefs = gql`
     firstName: String!
     lastName: String!
     setups: [Setup]
+    images: [Image]
   }
 
   # A Saxo's Setup
@@ -134,6 +135,16 @@ const typeDefs = gql`
     other: String
   }
 
+  type ImageTransform {
+    source: String!
+    width: Int
+    height: Int
+  }
+  type Image {
+    full: ImageTransform
+    thumb: ImageTransform
+  }
+
   type Query {
     players: [Player]
   }
@@ -179,7 +190,7 @@ const resolvers = {
               });
             })
           },
-          { id: player }
+          { id: player.id }
         );
       });
     }
