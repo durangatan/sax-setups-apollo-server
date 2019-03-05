@@ -2,6 +2,7 @@ interface Player {
   id: string;
   firstName: string;
   lastName: string;
+  tweetCount?: number;
 }
 
 enum Voice {
