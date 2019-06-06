@@ -14,7 +14,7 @@ const typeDefs = gql`
     lastName: String!
     setups: [Setup]
     images: [Image]
-    tweetCount: Number
+    tweetCount: Int
   }
 
   # A Saxo's Setup
@@ -86,7 +86,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    players: [Player]!
+    players: [Player!]!
   }
 `;
 
