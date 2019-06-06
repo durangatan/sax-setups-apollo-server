@@ -1,6 +1,5 @@
 import * as admin from 'firebase-admin';
 import { ApolloServer, gql } from 'apollo-server';
-import util from 'util';
 const serviceAccount = require('../service-account.json');
 
 admin.initializeApp({
@@ -15,6 +14,7 @@ const typeDefs = gql`
     lastName: String!
     setups: [Setup]
     images: [Image]
+    tweetCount: Number
   }
 
   # A Saxo's Setup
