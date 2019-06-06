@@ -86,7 +86,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    players: [Player]
+    players: [Player]!
   }
 `;
 
